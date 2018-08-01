@@ -60,10 +60,10 @@ DebGitIns()
   echo "Let's just make sure your on Debian/Ubuntu Distro"
   ans=$(cat /etc/*-release |grep 'ID='|grep -v 'VERSION*'|awk -F= '{ print $2}')
   if [[ $ans = debian ]]; then
-    :
   else
     echo "Are you sure your using Debian distro?"
     GitlabIns
+		:
   fi
   apt-get install -y curl openssh-server ca-certificates
   apt-get install -y postfix
@@ -76,14 +76,14 @@ DebGitIns()
   if [[ $? = 0 ]]; then
     echo "Hurray ! you have gitlab installed on $labans now just open your browser and start using it"
     echo "Don't forget the username is root and you'll need to make a password on your first login."
-  sleep 5
   exit 0
   fi
 }
 
+sleep 5
   CentosGitIns()
   {
-  cat /etc/*-release |grep 'ID='|grep -v 'VERSION*'|awk -F= '{ print $2}'
+  cat /etc/*-release |grep ID |cut  -d '=' -f '2' |egrep "^\"centos\"$"
   if [[ $ans = centos ]]; then
     :
   else
