@@ -60,6 +60,7 @@ DebGitIns()
   echo "Let's just make sure your on Debian/Ubuntu Distro"
   ans=$(cat /etc/*-release |grep 'ID='|grep -v 'VERSION*'|awk -F= '{ print $2}')
   if [[ $ans = debian ]]; then
+  	:
   else
     echo "Are you sure your using Debian distro?"
     GitlabIns
@@ -84,7 +85,7 @@ sleep 5
   CentosGitIns()
   {
   cat /etc/*-release |grep ID |cut  -d '=' -f '2' |egrep "^\"centos\"$"
-  if [[ $ans = centos ]]; then
+  if [[ $? -eq 0 ]]; then
     :
   else
     echo "Are you sure your using Centos Distro?"
